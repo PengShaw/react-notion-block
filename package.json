@@ -1,6 +1,6 @@
 {
   "name": "react-notion-block",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A react library to render notion block, support Notion Official API.",
   "main": "build/index.js",
   "module": "build/index.es.js",
