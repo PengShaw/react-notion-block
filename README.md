@@ -15,6 +15,63 @@ npm install react-notion-block
 
 ## Usage
 
+### Quick Start
+
+Here is an example for nextjs.
+```typescript
+import type { NextPage } from 'next'
+
+import { Client } from "@notionhq/client";
+import { Block } from "react-notion-block";
+import { BlockObjectResponse, PartialBlockObjectResponse, ListBlockChildrenResponse } from 'react-notion-block/build/notion.types';
+
+const notion = new Client({ auth: process.env.NOTION_TOKEN })
+
+const getBlocks = async (blockId: string) => {
+  var blocks: Array<PartialBlockObjectResponse | BlockObjectResponse> = [];
+  var has_more = true;
+  var start_cursor: string | undefined = undefined;
+  while (has_more) {
+    const response: ListBlockChildrenResponse = await notion.blocks.children.list({
+      block_id: blockId,
+      page_size: 50,
+      start_cursor
+    });
+    has_more = response.has_more;
+    start_cursor = response.next_cursor ? response.next_cursor : undefined;
+    blocks.push(...response.results);
+  }
+  return blocks;
+}
+
+
+interface Props {
+  blocks: Array<PartialBlockObjectResponse | BlockObjectResponse>;
+}
+
+export async function getServerSideProps() {
+  const blocks = await getBlocks('4c9f9730-61a6-408d-9a4e-210cab203782');
+
+  return {
+    props: { blocks },
+  }
+}
+
+const Home: NextPage<Props> = (props) => {
+  return (
+    <div>
+      {
+        props.blocks.filter(item => "type" in item).map((item, index) => (
+          <Block key={index} block={item} strict={true} />
+        ))
+      }
+    </div>
+  )
+}
+
+export default Home
+```
+
 ## Supported blocks
 
 ### Rich Text

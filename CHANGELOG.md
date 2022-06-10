@@ -3,4 +3,4 @@
 
 ### Features
 
-* v0.0.1 edit src code, add some components ([6e26d76](https://github.com/PengShaw/react-notion-block/commit/6e26d76539cc1288335f5559aa8336d14af57f44))
+* v0.0.1 edit src code, add some components ([99b6f50](https://github.com/PengShaw/react-notion-block/commit/99b6f5071511ef6aa0d000fb94bb3e86696ec73a))
