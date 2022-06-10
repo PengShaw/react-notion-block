@@ -1,0 +1,38 @@
+.rnb-text {}
+
+.rnb-text-bold {
+    font-weight: bold;
+}
+
+.rnb-text-code {
+    font-family: monospace;
+    background-color: rgb(242, 242, 242);
+    padding: 2px 4px;
+    border-radius: 2px;
+}
+
+.rnb-text-italic {
+    font-style: italic;
+}
+
+.rnb-text-strikethrough {
+    text-decoration: line-through;
+}
+
+.rnb-text-underline {
+    text-decoration: underline;
+}
+
+$text-color: default, gray, brown, orange, yellow, green, blue, purple, pink, red;
+
+@for $i from 1 through length($text-color) {
+    $item: nth($text-color, $i);
+
+    .rnb-text-color-#{$item} {
+        color: $item;
+    }
+
+    .rnb-text-color-#{$item}_background {
+        background-color: #{$item};
+    }
+}
